@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "advanced_inventory",
+  "version": "${version}",
+  "name": "Advanced Inventory - Singleplayer",
+  "description": "A client-only singleplayer item browser with configurable quantity and utility enchantments.",
+  "authors": ["Sua"],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.sua.advancedinventory.AdvancedInventoryClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.0",
+    "minecraft": "26.1.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
