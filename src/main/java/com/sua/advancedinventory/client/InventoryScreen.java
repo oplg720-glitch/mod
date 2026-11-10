@@ -182,7 +182,7 @@ public final class InventoryScreen extends Screen {
 
     private void showMessage(String message) {
         if (Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.displayClientMessage(Component.literal(message), false);
+            Minecraft.getInstance().player.sendSystemMessage(Component.literal(message));
         }
     }
 

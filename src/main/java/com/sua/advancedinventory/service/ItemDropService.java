@@ -142,7 +142,7 @@ public final class ItemDropService {
     private static void notifyClient(String message) {
         Minecraft client = Minecraft.getInstance();
         if (client.player != null) {
-            client.player.displayClientMessage(Component.literal(message), false);
+            client.player.sendSystemMessage(Component.literal(message));
         }
     }
 }
