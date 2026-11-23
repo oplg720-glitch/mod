@@ -2,9 +2,11 @@
   "schemaVersion": 1,
   "id": "advanced_inventory",
   "version": "${version}",
-  "name": "Advanced Inventory - Singleplayer",
-  "description": "A client-only singleplayer item browser with configurable quantity and utility enchantments.",
-  "authors": ["Sua"],
+  "name": "Advanced Inventory - Sakura Edition",
+  "description": "A Sakura-themed client-only Singleplayer item browser with registry discovery for compatible modded items.",
+  "authors": [
+    "Sua"
+  ],
   "environment": "client",
   "entrypoints": {
     "client": [

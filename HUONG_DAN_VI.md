@@ -1,53 +1,59 @@
-# Advanced Inventory — Hướng dẫn tiếng Việt
+# HƯỚNG DẪN — ADVANCED INVENTORY SAKURA 1.3.0
 
-## Bản hiện tại
+## 1. Cập nhật giao diện 1.3.0
 
-Đây là dự án mã nguồn Fabric cho Minecraft Java **26.1.2**, thiết kế **chỉ chạy ở Singleplayer**. Mod dùng lệnh client `/inv`; khi tạo đồ, mã chuyển công việc sang Integrated Server của thế giới đơn để vật phẩm được thả thành Item Entity thật trong thế giới. Không cần cài mod lên Dedicated Server.
+- Bảng nền Sakura plum-glass với viền vàng hồng và hoa anh đào ở góc.
+- Bố cục tách riêng danh mục, tìm kiếm, lưới vật phẩm và bảng xem trước.
+- Các ô vật phẩm có trạng thái rê chuột và chọn rõ ràng hơn.
+- Cánh hoa chuyển động nhẹ và các điểm sáng trang trí phía sau điều khiển.
+- Màn hình enchantment có thẻ riêng cho từng dòng và khu vực thống kê rõ ràng.
+- Đây chỉ là cập nhật giao diện; chức năng và cách xử lý vật phẩm được giữ nguyên.
 
-Bản khởi đầu có:
+## 2. Tính năng được giữ nguyên từ 1.2.0
 
-- GUI duyệt vật phẩm từ registry, gồm tìm kiếm theo tên/ID và các nhóm All, Blocks, Food, Tools, Redstone, Miscellaneous.
-- Ô nhập số lượng, nút tăng/giảm và nút MAX.
-- Tự chia thành các stack theo giới hạn stack của vật phẩm.
-- Nút thả vật phẩm xuống đất; không đưa vào inventory hoặc hotbar.
-- Màn hình enchantment tiện ích/phòng thủ, nhập level từ 1 đến 255.
-- Giới hạn entity để tránh tạo quá nhiều vật phẩm cùng lúc.
+- Danh sách enchantment đọc từ registry của thế giới Singleplayer đang mở, không còn chỉ có 18 mục cố định.
+- Tự phát hiện enchantment tương thích từ các mod đã cài và dữ liệu registry được đồng bộ.
+- Có ô tìm kiếm theo tên hiển thị hoặc ID đầy đủ, ví dụ `minecraft:unbreaking` hay `examplemod:swift_mining`.
+- Có phân trang để duyệt danh sách dài.
+- Mỗi enchantment có nút bật/tắt và ô nhập cấp độ từ 1 đến 255.
+- Có thể chọn nhiều enchantment tiện ích/phòng thủ cùng lúc.
+- Thêm phím tắt mở GUI, mặc định là `K`.
 
-Các vật phẩm hướng chiến đấu và enchantment thiên về tấn công không nằm trong danh sách của bản này.
+## 3. Đổi phím tắt
 
-## Build trực tuyến bằng GitHub Codespaces
+1. Mở Minecraft.
+2. Chọn **Options (Tùy chọn)**.
+3. Chọn **Controls (Điều khiển)** → **Key Binds (Tổ hợp phím)**.
+4. Tìm nhóm **Advanced Inventory**.
+5. Chọn **Open Advanced Inventory**.
+6. Nhấn phím mới muốn gán. Nếu phím đang được mod khác sử dụng, chọn một phím khác để tránh xung đột.
 
-1. Tạo một Repository GitHub trống.
-2. Giải nén ZIP dự án trên máy tính.
-3. Mở Repository → **Add file → Upload files**.
-4. Kéo toàn bộ nội dung bên trong thư mục dự án đã giải nén vào trang Upload files. Phải upload các tệp `build.gradle`, `settings.gradle`, `gradle.properties`, `src`, `.devcontainer` và `.github` ở thư mục gốc Repository.
-5. Nhấn **Commit changes**.
-6. Chọn **Code → Codespaces → Create codespace on main**.
-7. Đợi Codespaces đọc `.devcontainer/devcontainer.json` và cài Java 25 cùng Gradle 9.4.1.
-8. Mở Terminal và chạy:
+Phím mặc định: `K`. Khi đang ở Singleplayer, nhấn `K` để mở; nhấn lại khi GUI Advanced Inventory đang mở để đóng. Lệnh `/inv` vẫn hoạt động.
+
+## 4. Phạm vi enchantment
+
+Mod đọc dữ liệu từ registry để hiển thị enchantment tiện ích, di chuyển, câu cá và phòng thủ, bao gồm các mục từ mod tương thích. Những enchantment tập trung vào tăng sát thương hoặc sử dụng vũ khí/chiến đấu vẫn bị loại khỏi danh sách và bị chặn ở bước tạo vật phẩm.
+
+## 5. Cập nhật source trên GitHub
+
+1. Tải ZIP source 1.3.0 và giải nén.
+2. Mở Repository.
+3. Chọn **Add file → Upload files**.
+4. Upload toàn bộ nội dung bên trong thư mục dự án, giữ nguyên cấp thư mục.
+5. Thay thế file cũ khi GitHub báo trùng.
+6. Nhấn **Commit changes**.
+7. Mở **Actions** để theo dõi workflow build.
+
+## 6. Build trong Codespaces
+
+Mở Codespace, chọn Terminal và chạy:
 
 ```bash
 gradle --no-daemon clean build
 ```
 
-Nếu build thành công, JAR sẽ nằm trong `build/libs/`.
+Nếu thành công, file JAR nằm trong `build/libs/`. Có thể tải artifact từ GitHub Actions sau khi workflow hoàn tất thành công.
 
-Có thể thay bước Terminal bằng cách mở tab **Actions** của Repository. Workflow **Build Fabric mod** sẽ tự chạy sau khi push/commit. Khi trạng thái xanh, mở lần chạy đó và tải artifact `advanced-inventory-fabric-26.1.2`.
+## 7. Trạng thái kiểm thử
 
-## Cài vào Minecraft
-
-1. Dùng profile Minecraft 26.1.2 có Fabric Loader.
-2. Cài Fabric API đúng phiên bản tương thích 26.1.2.
-3. Chép JAR mod vào thư mục `mods` của profile.
-4. Vào thế giới Singleplayer và gõ `/inv` trong chat.
-
-## Thông số giới hạn
-
-- Giới hạn tổng: tối đa 4.096 vật phẩm mỗi yêu cầu.
-- Giới hạn số entity: tối đa 128 stack/entity mỗi yêu cầu.
-- Vì vậy, giới hạn thực tế phụ thuộc vào max stack size của vật phẩm. Ví dụ vật phẩm không stack được có giới hạn 128 mỗi lần; nút MAX sẽ tự tính con số tương ứng.
-- Enchantment được ghi vào data component `ENCHANTMENTS`; tuy nhiên bản mã nguồn này chưa được xác nhận qua build và kiểm thử trong game.
-
-## Lưu ý về trạng thái build
-
-Môi trường tạo dự án hiện tại chỉ có Java 21, trong khi Minecraft 26.1.2 cần Java 25. Vì vậy chưa thể build JAR tại đây và không được xem ZIP này là JAR đã biên dịch. Hãy chạy build trong Codespaces hoặc GitHub Actions; nếu xuất hiện lỗi, gửi nội dung tab **Actions → Build Fabric mod → Build mod** để tiếp tục sửa.
+Đã thực hiện kiểm tra tĩnh source/resource và JSON. Chưa chạy Gradle build hoặc thử trong client Minecraft tại môi trường đóng gói này; cần xác nhận qua Codespaces/GitHub Actions trước khi cài JAR vào world chính.

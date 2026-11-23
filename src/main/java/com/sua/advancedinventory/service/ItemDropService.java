@@ -1,10 +1,10 @@
 package com.sua.advancedinventory.service;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import com.sua.advancedinventory.catalog.ItemCatalog;
+import com.sua.advancedinventory.enchantment.EnchantmentRules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -26,17 +26,10 @@ public final class ItemDropService {
     public static final int MAX_QUANTITY = 4096;
     private static final int MAX_ENTITIES_PER_REQUEST = 128;
 
-    private static final Set<String> SAFE_ENCHANTMENTS = Set.of(
-        "unbreaking", "mending", "efficiency", "silk_touch", "fortune",
-        "aqua_affinity", "respiration", "feather_falling", "depth_strider",
-        "frost_walker", "soul_speed", "swift_sneak", "luck_of_the_sea", "lure",
-        "protection", "fire_protection", "blast_protection", "projectile_protection"
-    );
-
     private ItemDropService() { }
 
     public static boolean isAllowedEnchantment(String id) {
-        return SAFE_ENCHANTMENTS.contains(id);
+        return EnchantmentRules.isAllowed(id);
     }
 
     /** Returns the safe per-request quantity for an item, respecting its stack size and entity cap. */
@@ -80,11 +73,14 @@ public final class ItemDropService {
             for (Map.Entry<String, Integer> entry : enchantments.entrySet()) {
                 String enchantmentId = entry.getKey();
                 int level = Math.max(1, Math.min(255, entry.getValue()));
-                if (!SAFE_ENCHANTMENTS.contains(enchantmentId)) continue;
+                if (!EnchantmentRules.isAllowed(enchantmentId)) continue;
 
+                String[] idParts = enchantmentId.split(":", 2);
+                String namespace = idParts.length == 2 ? idParts[0] : "minecraft";
+                String path = idParts.length == 2 ? idParts[1] : idParts[0];
                 ResourceKey<Enchantment> key = ResourceKey.create(
                     Registries.ENCHANTMENT,
-                    Identifier.fromNamespaceAndPath("minecraft", enchantmentId)
+                    Identifier.fromNamespaceAndPath(namespace, path)
                 );
                 try {
                     Holder<Enchantment> holder = server.registryAccess()
